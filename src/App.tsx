@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { Switch, Route } from 'react-router';
+import { PrivateRoute } from './routes/PrivateRoute';
+import { Login } from './pages/Login';
+import { Landing } from './pages/Landing';
+import { Home } from './pages/Home';
+import { OAuthCallback } from 'react-oauth2-hook';
+import { AuthProvider } from './contexts/auth/auth-provider';
+import { useAuth } from './contexts/auth/auth-context';
 
-function App() {
+const App: React.FC = () => {
+  const [auth, methods] = useAuth()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Switch>
+        <AuthProvider>
+          <PrivateRoute exact={true} path='/' component={Landing} />
+          <PrivateRoute path='/home' component={Home} />
+          <Route path='/login' component={Login} />
+          <Route path='/callback' component={OAuthCallback} />
+        </AuthProvider>
+      </Switch>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
