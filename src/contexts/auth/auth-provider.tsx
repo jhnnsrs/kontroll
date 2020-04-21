@@ -20,9 +20,9 @@ export const AuthProvider = (props: any) => {
   }) 
 
   useEffect(() => {
-    console.log("called with token", typeof(token))
       if (token && token != "undefined") {
         console.log(token)
+        localStorage.setItem("token",token)
         methods.token_success(token)
         fetch(
           'http://localhost:8000/api/config/nodes', {
