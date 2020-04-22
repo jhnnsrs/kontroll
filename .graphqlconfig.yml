@@ -1,5 +1,4 @@
 projects:
     app:
-      extensions:
-        endpoints:
-          default: http://localhost:8000/graphql
+      schemaPath: src/schema.graphql
+      includes: ["**/*.graphql"]

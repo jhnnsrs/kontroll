@@ -1,44 +1,37 @@
-import React, { useEffect } from 'react';
-import { Switch, Route } from 'react-router';
-import { PrivateRoute } from './routes/PrivateRoute';
-import { Login } from './pages/Login';
-import { Landing } from './pages/Landing';
-import { Home } from './pages/Home';
+import { ClientContext, GraphQLClient } from 'graphql-hooks';
+import React from 'react';
 import { OAuthCallback } from 'react-oauth2-hook';
+import { Route, Switch } from 'react-router';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { AuthProvider } from './contexts/auth/auth-provider';
-import { useAuth } from './contexts/auth/auth-context';
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient  from 'apollo-boost';
+import { Home } from './pages/Home';
+import { Landing } from './pages/Landing';
+import { Login } from './pages/Login';
+import { PrivateRoute } from './routes/PrivateRoute';
 
-const client = new ApolloClient({
-  uri: 'http://localhost:8000/graphql',
-  request: (operation) => {
-    const token = localStorage.getItem('token')
-    console.log("Authenticating with token",token)
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    })
-  }
-});
+
+
+const client = new GraphQLClient({
+  url: 'http://localhost:8000/graphql',
+  subscriptionClient: new SubscriptionClient('ws://localhost:8000/graphql/', {
+    /* additional config options */
+  })
+})
 
 
 
 const App: React.FC = () => {
-  const [auth, methods] = useAuth()
-
   return (
     <div>
       <Switch>
-      <ApolloProvider client={client}>
+      <ClientContext.Provider value={client}>
         <AuthProvider>
           <PrivateRoute exact={true} path='/' component={Landing} />
           <PrivateRoute path='/home' component={Home} />
           <Route path='/login' component={Login} />
           <Route path='/callback' component={OAuthCallback} />
         </AuthProvider>
-      </ApolloProvider>
+      </ClientContext.Provider>
       </Switch>
     </div>
   )

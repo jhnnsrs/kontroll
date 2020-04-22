@@ -1,10 +1,9 @@
-import React from "react";
+import { ClientContext } from "graphql-hooks";
+import React, { useContext, useEffect } from "react";
+import { useOAuth2Token } from 'react-oauth2-hook';
+import { AuthContext } from './auth-context';
+import { useAuthMethods } from './auth-methods';
 
-import {AuthContext} from './auth-context'
-import { useAuthMethods } from './auth-methods'
-import { useOAuth2Token } from 'react-oauth2-hook'
-import { useEffect } from 'react'
-import { TLSSocket } from "tls";
 
 const redirectUri = window.location.origin +"/callback"
 
@@ -12,6 +11,7 @@ const redirectUri = window.location.origin +"/callback"
 export const AuthProvider = (props: any) => {
   // const [cart, setCart] = useState([]);
   const [authState, methods] = useAuthMethods()
+  const client = useContext(ClientContext)
   const [token, getToken, setToken] = useOAuth2Token({
     authorizeUrl: "http://localhost:8000/o/authorize",
     scope: ["read"],
@@ -20,9 +20,10 @@ export const AuthProvider = (props: any) => {
   }) 
 
   useEffect(() => {
-      if (token && token != "undefined") {
+      if (token && token !== "undefined") {
         console.log(token)
         localStorage.setItem("token",token)
+        client.setHeader('Authorization', `Bearer ${token}`)
         methods.token_success(token)
         fetch(
           'http://localhost:8000/api/config/nodes', {
@@ -33,7 +34,7 @@ export const AuthProvider = (props: any) => {
           data => console.log(data)
         ).catch(error => console.log(error))
       }
-    },[token])
+    },[token, client, methods])
 
   const login = () => {
     console.log("Redirection URI:", redirectUri)
