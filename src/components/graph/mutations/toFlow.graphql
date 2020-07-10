@@ -1,0 +1,13 @@
+mutation convertToFlot($graph: ID!){
+  toFlow(graph: $graph){
+    status
+    node {
+      inputs {
+        __typename
+      }
+      outputs {
+        __typename
+      }
+    }
+  }
+}

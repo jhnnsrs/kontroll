@@ -1,4 +1,6 @@
 {
+    
+    "editor.suggest.insertMode": "replace",
     "editor.codeActionsOnSave": {
     "source.fixAll": true
     },

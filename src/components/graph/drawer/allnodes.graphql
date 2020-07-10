@@ -1,0 +1,8 @@
+query allNodes {
+    nodes {
+        id
+        name
+        variety
+    }
+
+}

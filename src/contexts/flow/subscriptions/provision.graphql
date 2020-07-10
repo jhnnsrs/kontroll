@@ -1,0 +1,28 @@
+subscription provisionNode($id: ID!, $reference: String, $selector: String = "@auto"){
+  provide(node: $id, selector: $selector, reference: $reference){
+    pod {
+      id
+      status
+      unique
+      provider
+    }
+  	node {
+      id
+      name
+      inputs {
+        __typename
+      }
+      outputs {
+        __typename
+      }
+    }
+    user {
+      username
+      firstName
+      lastName
+    }
+    reference
+    status
+  }
+}
+

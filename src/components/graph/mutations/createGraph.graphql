@@ -1,0 +1,10 @@
+mutation createGraph($diagram: GenericScalar!, $name: String!) {
+  createGraph(diagram: $diagram, name: $name ){
+    status
+    graph {
+      id
+      name
+      description
+    }
+  }
+}

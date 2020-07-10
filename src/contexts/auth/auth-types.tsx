@@ -1,15 +1,4 @@
-export type Scopes = 
-  | "CAN_READ"
-  | "CAN_PARSE"
-  | "CAN_HOST_POD"
-  | "CAN_PROVIDE_POD"
-
-export type Provider = {
-    clientid: string,
-    clientsecret: string,
-    authorization_url: string,
-    scopes: [Scopes]
-}
+import { Provider } from "../bergen/bergen-types"
 
 export type User = {
     name: string,

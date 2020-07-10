@@ -1,13 +1,10 @@
 import useMethods from 'use-methods'
-import { AuthState , Token, User, Provider} from './auth-types'
+import { AuthState , Token, User} from './auth-types'
 
  
 export const authState = { provider: null, isAuthenticated: false,  token: undefined, user: null}
 
 const methods = (state: AuthState) => ({
-      login(provider: Provider) {
-        state.provider = provider;
-      },
       token_success(token: Token) {
         state.token = token;
         state.isAuthenticated = true

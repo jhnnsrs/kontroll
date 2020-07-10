@@ -1,0 +1,15 @@
+mutation provideNode($node: ID!, $selector: String){
+  provide(node: $node, selector: $selector){
+    node{
+      name
+    }
+    pod {
+      id
+    }
+    provider
+    user {
+      id
+    }
+    reference
+  }
+}

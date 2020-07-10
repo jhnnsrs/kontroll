@@ -1,0 +1,86 @@
+
+query graphNode($id: ID!) {
+    node(id: $id) {
+        name
+        description
+        package
+        interface
+        variety
+        outputs {
+            ...Ports
+        }
+        inputs {
+             ...Ports
+        }
+    }
+}
+
+fragment Ports on PortType{
+    ... on IntPortType {
+                 __typename
+                key
+                name
+                description
+                required
+                default
+            }
+    ... on CharPortType {
+            __typename
+        key
+        name
+        description
+        required
+        default
+    }
+    ... on BoolPortType {
+            __typename
+        key
+        name
+        description
+        required
+        default
+    }
+    ... on UUIDPortType {
+            __typename
+        key
+        name
+        description
+        required
+        default
+    }
+    ... on FilePortType {
+            __typename
+        key
+        name
+        description
+        required
+        default
+    }
+    ... on ListPortType {
+            __typename
+        key
+        name
+        description
+        required
+        default
+    }
+    ... on ObjectPortType {
+            __typename
+        key
+        name
+        description
+        required
+        default
+    }
+    ... on ModelPortType {
+            __typename
+        key
+        name
+        description
+        required
+        default
+    }
+
+
+}
+

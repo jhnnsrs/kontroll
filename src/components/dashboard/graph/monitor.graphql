@@ -1,0 +1,45 @@
+query monitorquery($reference: String!) {
+    data: monitor(reference: $reference) {
+            provider
+            pod {
+                status
+                persistent
+                unique
+            }
+            node {
+                id
+                inputs {
+                    __typename
+                }
+                outputs {
+                    __typename
+                }
+            }
+    }
+}
+
+
+subscription monitorsubscribe($reference: String!) {
+    data: monitor(reference: $reference) {
+            pod {
+                provider
+                status
+                persistent
+                unique
+            }
+            node {
+                id
+                inputs {
+                    __typename
+                }
+                outputs {
+                    __typename
+                }
+            }
+            user {
+                username
+            }
+    }
+}
+
+

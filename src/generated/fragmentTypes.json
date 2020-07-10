@@ -1,0 +1,39 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "PortType",
+        "possibleTypes": [
+          {
+            "name": "BoolPortType"
+          },
+          {
+            "name": "CharPortType"
+          },
+          {
+            "name": "IntPortType"
+          },
+          {
+            "name": "FilePortType"
+          },
+          {
+            "name": "ListPortType"
+          },
+          {
+            "name": "UUIDPortType"
+          },
+          {
+            "name": "ModelPortType"
+          },
+          {
+            "name": "ObjectPortType"
+          },
+          {
+            "name": "BasePortType"
+          }
+        ]
+      }
+    ]
+  }
+}
