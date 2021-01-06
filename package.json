@@ -28,7 +28,7 @@
     "apollo-boost": "^0.4.7",
     "apollo-link-context": "^1.0.20",
     "apollo-link-ws": "^1.0.20",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "closest": "^0.0.1",
     "dagre": "^0.8.5",
